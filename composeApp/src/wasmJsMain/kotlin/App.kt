@@ -1,9 +1,13 @@
-import androidx.compose.material.MaterialTheme
+import androidx.compose.foundation.layout.Column
 import androidx.compose.runtime.Composable
+import ui.theme.MyResumeTheme
+import ui.uiComponent.NavigationBar
 
 @Composable
 fun App() {
-    MaterialTheme {
-
+    MyResumeTheme {
+        Column {
+            NavigationBar()
+        }
     }
 }
