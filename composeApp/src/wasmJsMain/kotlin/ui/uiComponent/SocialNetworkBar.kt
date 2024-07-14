@@ -8,12 +8,16 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.unit.dp
+import model.UserInfo
 import myresume.composeapp.generated.resources.*
 import org.jetbrains.compose.resources.painterResource
 import ui.theme.primaryBlue
 
 @Composable
-fun SocialNetworkBar(modifier: Modifier = Modifier) {
+fun SocialNetworkBar(
+    userInfo: UserInfo,
+    modifier: Modifier = Modifier
+) {
     val iconSize = 26.dp
     Column(
         modifier = modifier
