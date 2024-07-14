@@ -14,7 +14,7 @@ import myresume.composeapp.generated.resources.Res
 import myresume.composeapp.generated.resources.rubik_light
 import org.jetbrains.compose.resources.Font
 import ui.theme.darkPrimaryBlue
-import ui.theme.navigationFontColor
+import ui.theme.wheatFontColor
 import ui.theme.navigationTypo
 import ui.theme.primaryBlue
 
@@ -30,7 +30,7 @@ fun NavigationBar(modifier: Modifier = Modifier) {
                 Text(
                     text = it,
                     style = navigationTypo.copy(
-                        color = navigationFontColor,
+                        color = wheatFontColor,
                         fontFamily = FontFamily(rubikRegular)
                     )
                 )

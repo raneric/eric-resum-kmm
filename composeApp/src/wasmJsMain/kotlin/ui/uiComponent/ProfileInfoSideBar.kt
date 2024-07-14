@@ -1,6 +1,7 @@
 package ui.uiComponent
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.Card
@@ -11,16 +12,17 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.painter.Painter
-import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import model.UserInfo
 import myresume.composeapp.generated.resources.*
 import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.Font
 import org.jetbrains.compose.resources.painterResource
+import ui.theme.darkBlueBackground
+import ui.theme.wheatFontColor
 
 @Composable
 fun ProfileInfoSideBar(
@@ -45,6 +47,7 @@ fun ProfileInfoSideBar(
         ) {
             ProfilePicture(userInfo.pictureProfile)
             UserDetails(userInfo)
+            SectionTitle("Compétances techniques")
         }
     }
 }
@@ -119,3 +122,16 @@ fun UserDetailsItem(
     }
 }
 
+@Composable
+fun SectionTitle(title: String, modifier: Modifier = Modifier) {
+    Text(
+        text = title,
+        color = wheatFontColor,
+        textAlign = TextAlign.Center,
+        modifier = modifier
+            .fillMaxWidth()
+            .padding(vertical = 2.dp)
+            .clip(MaterialTheme.shapes.small)
+            .background(darkBlueBackground)
+    )
+}
