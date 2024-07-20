@@ -1,28 +1,23 @@
 package ui.uiComponent
 
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Card
 import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.painter.Painter
-import androidx.compose.ui.text.font.FontFamily
-import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import data.techSkills
 import model.UserInfo
-import myresume.composeapp.generated.resources.*
-import org.jetbrains.compose.resources.DrawableResource
-import org.jetbrains.compose.resources.Font
-import org.jetbrains.compose.resources.painterResource
-import ui.theme.darkBlueBackground
-import ui.theme.wheatFontColor
+import myresume.composeapp.generated.resources.Res
+import myresume.composeapp.generated.resources.tech_skill_section
+import org.jetbrains.compose.resources.stringResource
+import ui.uiCore.ProfilePicture
+import ui.uiCore.Skills
+import ui.uiCore.TechSkillsRow
+import ui.uiCore.UserDetails
 
 @Composable
 fun ProfileInfoSideBar(
@@ -37,7 +32,7 @@ fun ProfileInfoSideBar(
         shape = MaterialTheme.shapes.small
     ) {
         Column(
-            modifier = Modifier.padding(
+            modifier = Modifier.verticalScroll(rememberScrollState()).padding(
                 top = 16.dp,
                 start = 8.dp,
                 end = 8.dp
@@ -47,91 +42,14 @@ fun ProfileInfoSideBar(
         ) {
             ProfilePicture(userInfo.pictureProfile)
             UserDetails(userInfo)
-            SectionTitle("Compétances techniques")
-        }
-    }
-}
-
-@Composable
-fun ProfilePicture(
-    picture: DrawableResource,
-    modifier: Modifier = Modifier
-) {
-    Image(
-        modifier = modifier.size(190.dp).clip(CircleShape),
-        painter = painterResource(picture),
-        contentDescription = ""
-    )
-}
-
-@Composable
-fun UserDetails(
-    userInfo: UserInfo,
-    modifier: Modifier = Modifier
-) {
-    Card(modifier = modifier.fillMaxWidth(), elevation = 4.dp) {
-        Column(
-            modifier = Modifier.padding(8.dp),
-            verticalArrangement = Arrangement.SpaceAround,
-            horizontalAlignment = Alignment.Start
-        ) {
-            UserDetailsItem(
-                icon = painterResource(Res.drawable.name_svg),
-                text = userInfo.fullName
-            )
-            UserDetailsItem(
-                icon = painterResource(Res.drawable.birthdate_svg),
-                text = userInfo.birthDate
-            )
-            UserDetailsItem(
-                icon = painterResource(Res.drawable.phone_svg),
-                text = userInfo.phoneNumber
-            )
-            UserDetailsItem(
-                icon = painterResource(Res.drawable.mail_svg),
-                text = userInfo.email
+            Skills(
+                tittle = stringResource(Res.string.tech_skill_section),
+                element = {
+                    techSkills.forEach {
+                        TechSkillsRow(skill = it)
+                    }
+                }
             )
         }
     }
-}
-
-@Composable
-fun UserDetailsItem(
-    icon: Painter,
-    text: String,
-    modifier: Modifier = Modifier
-) {
-    val rubikRegular = Font(Res.font.rubik_light)
-    Row(
-        modifier = modifier,
-        horizontalArrangement = Arrangement.spacedBy(8.dp),
-        verticalAlignment = Alignment.CenterVertically
-    ) {
-        Image(
-            modifier = Modifier.size(16.dp),
-            painter = icon,
-            contentDescription = null
-        )
-        Text(
-            text = text,
-            style = MaterialTheme.typography.body2.copy(
-                fontWeight = FontWeight.Bold,
-                fontFamily = FontFamily(rubikRegular)
-            )
-        )
-    }
-}
-
-@Composable
-fun SectionTitle(title: String, modifier: Modifier = Modifier) {
-    Text(
-        text = title,
-        color = wheatFontColor,
-        textAlign = TextAlign.Center,
-        modifier = modifier
-            .fillMaxWidth()
-            .padding(vertical = 2.dp)
-            .clip(MaterialTheme.shapes.small)
-            .background(darkBlueBackground)
-    )
 }
